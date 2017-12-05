@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
         startService(bindIntent);
 
 
-       // Intent LocationIntent = new Intent(this,LocationService.class);//screen on of service
+        // Intent LocationIntent = new Intent(this,LocationService.class);//screen on of service
         //startService(LocationIntent);
 
 
