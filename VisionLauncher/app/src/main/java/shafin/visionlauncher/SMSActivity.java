@@ -39,9 +39,9 @@ import static android.view.GestureDetector.*;
 public class SMSActivity extends SettingActivity implements OnGestureListener,GestureDetector.OnDoubleTapListener,LocationListener {
 
     View view;
-    TextView textView;
+    TextView textView,textView2;
     final int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
-    
+
     TextView locationText;
     double l;
     double n;
@@ -64,15 +64,20 @@ public class SMSActivity extends SettingActivity implements OnGestureListener,Ge
 
 
         textView=(TextView)findViewById(R.id.textView);
+        textView2=(TextView)findViewById(R.id.textView2);
         gestureDetectorCompat=new GestureDetectorCompat(this,this);
         gestureDetectorCompat.setOnDoubleTapListener(this);
        textView.setText("Emergency SMS Support");
+       textView2.setText("welcome to vision emergency sms support.  \n" +
+               "Double tap to send sms. \n" +
+               "Swipe from right to go back to main menu.  \n");
 
         textToSpeech=new TextToSpeech(SMSActivity.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
                 if (i==TextToSpeech.SUCCESS){
-                    textToSpeech.speak("welcome to vision emergency sms support.  " +
+                    textToSpeech.speak(
+                            "welcome to vision emergency sms support.  " +
                             "Double tap to send sms " +
                             "Swipe from right to go back to main menu" ,TextToSpeech.QUEUE_FLUSH,null);
                 }
@@ -136,6 +141,7 @@ public class SMSActivity extends SettingActivity implements OnGestureListener,Ge
                     if(checkPermission(Manifest.permission.SEND_SMS)) {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(phoneNo, null, getName()+","+getSms()+"\n"+message, null, null);
+                        Toast.makeText(SMSActivity.this, "SMS sent", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(SMSActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
                     }

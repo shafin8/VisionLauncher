@@ -23,12 +23,12 @@ import static android.view.GestureDetector.*;
 
 
 public class MainActivity extends AppCompatActivity implements OnGestureListener,GestureDetector.OnDoubleTapListener {
-    TextView textView;
+    TextView textView,textView2,textView3;
     GestureDetectorCompat gestureDetectorCompat;
     TextToSpeech textToSpeech,tts;
     int counter = 0;
     String batterylevel;
-    private String[] menuList = {"music", "services", "main menu","setting", "status","call","emergency sms", "Video Call"};
+    private String[] menuList = {"Music", "Services", "Main Menu","Setting", "Status","Call","Emergency SMS", "Video Call"};
 
 
 
@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
 
 
         textView=(TextView)findViewById(R.id.textView);
+        textView2=(TextView)findViewById(R.id.textView2);
+        textView3=(TextView)findViewById(R.id.textView3);
+        textView.setText("Welcome to Vision Launcher. \n Swipe up and down to choose menu and double tap to select item.");
         gestureDetectorCompat=new GestureDetectorCompat(this,this);
         gestureDetectorCompat.setOnDoubleTapListener(this);
 
@@ -81,13 +84,13 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
-        textView.setText("onSingleTapConfirmed");
+       // textView.setText("onSingleTapConfirmed");
         return false;
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
-        textView.setText("onDoubleTap");
+       // textView.setText("onDoubleTap");
 
         if (counter==0) {
 
@@ -99,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
          //   startActivity(intent);
         }
         else if (counter==2){
-         //   Intent intent = new Intent(getApplicationContext(), MusicActivity.class);
-         //   startActivity(intent);
+           Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+           startActivity(intent);
         }
         else if (counter==3){
 
@@ -138,24 +141,25 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onDoubleTapEvent(MotionEvent motionEvent) {
-        textView.setText("onDoubleTapEvent");
+       // textView.setText("onDoubleTapEvent");
         return false;
     }
 
     @Override
     public boolean onDown(MotionEvent motionEvent) {
-        textView.setText("onDown");
+       // textView.setText("onDown");
         return false;
     }
 
     @Override
     public void onShowPress(MotionEvent motionEvent) {
-        textView.setText("onShowPress");
+
+        //textView.setText("onShowPress");
     }
 
     @Override
     public boolean onSingleTapUp(MotionEvent motionEvent) {
-        textView.setText("onSingleTapUp");
+       // textView.setText("onSingleTapUp");
 
 
         return false;
@@ -163,23 +167,27 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        textView.setText("onScroll");
+       // textView.setText("onScroll");
 
         return false;
     }
 
     @Override
     public void onLongPress(MotionEvent motionEvent) {
-        textView.setText("onLongPress");
+
+        //textView.setText("onLongPress");
     }
 
     @Override
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        textView.setText("onFling");
 
+        textView2.setText("");
+        textView3.setText("");
         counter++;
+
         if (counter >= menuList.length)
             counter = 0;
+        textView.setText(menuList[counter]);
         textToSpeech=new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -226,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
                     if (i==TextToSpeech.SUCCESS){
                         Date currentTime = Calendar.getInstance().getTime();
                         textToSpeech.speak("Battery level is"+batterylevel+"and charger is connected",TextToSpeech.QUEUE_FLUSH,null);
+                        textView3.setText("Battery level is"+batterylevel+"and charger is connected");
                     }
                     else Toast.makeText(getApplicationContext(),"Feature not supported by your device",Toast.LENGTH_LONG).show();
 
@@ -240,6 +249,8 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
                     if (i==TextToSpeech.SUCCESS){
                         Date currentTime = Calendar.getInstance().getTime();
                         textToSpeech.speak("Battery level is"+batterylevel+"and charger is not connected",TextToSpeech.QUEUE_FLUSH,null);
+                        textView3.setText("Battery level is"+batterylevel+"and charger is not connected");
+
                     }
                     else Toast.makeText(getApplicationContext(),"Feature not supported by your device",Toast.LENGTH_LONG).show();
 
@@ -257,7 +268,8 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
                 if (i==TextToSpeech.SUCCESS){
                     Date currentTime = Calendar.getInstance().getTime();
                     textToSpeech.speak("Today's date is :"+currentTime.toString(),TextToSpeech.QUEUE_FLUSH,null);
-                   // Toast.makeText(getApplicationContext(),currentTime.toString(),Toast.LENGTH_LONG).show();
+                    textView2.setText("Today's date is :"+currentTime.toString());
+                   //Toast.makeText(getApplicationContext(),currentTime.toString(),Toast.LENGTH_LONG).show();
                 }
                 else Toast.makeText(getApplicationContext(),"Feature not supported by your device",Toast.LENGTH_LONG).show();
                 battery();
