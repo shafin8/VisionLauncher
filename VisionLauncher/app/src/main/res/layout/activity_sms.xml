@@ -2,8 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/music"
+    android:background="@drawable/sms"
     android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#90363636"
+    android:orientation="vertical">
+
 
 
     <TextView
@@ -32,4 +38,5 @@
         android:textColor="#ffffff"
         android:textSize="20dp"
         android:layout_marginTop="40dp"/>
+</LinearLayout>
 </LinearLayout>

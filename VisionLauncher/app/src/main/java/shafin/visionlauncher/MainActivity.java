@@ -58,14 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
 
 
 
-        Button button=(Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),AppsListActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 
@@ -176,6 +169,8 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
     public void onLongPress(MotionEvent motionEvent) {
 
         //textView.setText("onLongPress");
+        Intent intent=new Intent(getApplicationContext(),AppsListActivity.class);
+        startActivity(intent);
     }
 
     @Override
