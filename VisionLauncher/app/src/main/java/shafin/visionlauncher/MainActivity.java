@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
     TextToSpeech textToSpeech,tts;
     int counter = 0;
     String batterylevel;
-    private String[] menuList = {"music", "services", "main menu","setting", "status","call", "Video Call"};
+    private String[] menuList = {"music", "services", "main menu","setting", "status","call","emergency sms", "Video Call"};
 
 
 
@@ -120,6 +120,12 @@ public class MainActivity extends AppCompatActivity implements OnGestureListener
 
         }
         else if (counter==6){
+
+            Intent intent = new Intent(getApplicationContext(), SMSActivity.class);
+            startActivity(intent);
+
+        }
+        else if (counter==7){
 
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
